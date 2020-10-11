@@ -7,6 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('node-dashboard:server');
 var http = require('http');
+const path =require('path');
+
+require("dotenv").config({
+  path: path.join(__dirname, "../.env")
+});
+
 
 /**
  * Get port from environment and store in Express.
