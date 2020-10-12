@@ -61,4 +61,9 @@ app.use(async (req, res, next) => {
   }
 });
 
+const getUserData = () => {
+  const jsonData = fs.readFileSync('./users.json')
+  return JSON.parse(jsonData)
+}
+
 module.exports = app;

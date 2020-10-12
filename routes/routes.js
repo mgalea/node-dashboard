@@ -20,6 +20,7 @@ async function hashPassword(password) {
 }
 
 router.use(express.json());
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'MGA  Compliance Portal - Random Systems International', header: 'Dashboard' });
@@ -30,6 +31,8 @@ router.get('/login', function (req, res, next) {
     res.render('login', { title: 'Login Page' });
 
 });
+
+router.post('/login', urlencodedParser, userController.login);
 
 /* GET passwords. */
 router.get('/password', function (req, res, next) {
@@ -51,7 +54,7 @@ router.post('/user/add', urlencodedParser, async (req, res) => {
 
     //get the new user data from post request
     const userData=req.body;
-    console.log=(userData);
+
     //check if the userData fields are missing
     if (userData.email == null || userData.username == null || userData.password == null) {
         return res.status(401).send({ error: true, msg: 'User data missing' })
@@ -88,7 +91,7 @@ router.get('/user/list', (req, res) => {
 })
 
 /* Update - Patch method */
-router.patch('/user/update/:username', (req, res) => {
+router.patch('/user/update/:username', urlencodedParser, async (req, res) => {
     //get the username from url
     const username = req.params.username
 
@@ -103,12 +106,22 @@ router.patch('/user/update/:username', (req, res) => {
     if (!findExist) {
         return res.status(409).send({ error: true, msg: 'username not exist' })
     }
+    if(userData.email !==null) {
+        findExist.email =userData.email;
+    }
+    if (userData.password !== null) {
+        findExist.password = await hashPassword(userData.password);
+    }
 
+    findExist.accessToken = jwt.sign(findExist, process.env.JWT_SECRET, {
+        expiresIn: "1d"
+    });
+    
     //filter the userdata
     const updateUser = existUsers.filter(user => user.username !== username)
 
     //push the updated data
-    updateUser.push(userData)
+    updateUser.push(findExist);
 
     //finally save it
     saveUserData(updateUser)
@@ -143,12 +156,12 @@ router.delete('/user/delete/:username', (req, res) => {
 //read the user data from json file
 const saveUserData = (data) => {
     const stringifyData = JSON.stringify(data)
-    fs.writeFileSync(__dirname + '/users.json', stringifyData)
+    fs.writeFileSync('./users.json', stringifyData)
 }
 
 //get the user data from json file
 const getUserData = () => {
-    const jsonData = fs.readFileSync(__dirname + '/users.json')
+    const jsonData = fs.readFileSync('./users.json')
     return JSON.parse(jsonData)
 }
 

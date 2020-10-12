@@ -5,6 +5,7 @@ const ac = new AccessControl();
 exports.roles = (function () {
     ac.grant("basic")
         .readOwn("profile")
+        .readOwn("dashboard")
         .updateOwn("profile")
 
     ac.grant("supervisor")
