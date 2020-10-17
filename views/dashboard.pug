@@ -1,0 +1,39 @@
+extends layout
+
+block extra_stylesheets
+    link(href='stylesheets/widget.css' rel='stylesheet')
+    link(href='stylesheets/font-awesome.css' rel='stylesheet')
+
+block content
+    nav.bg-dark.fixed-top.navbar.navbar-dark.navbar-expand-lg
+        
+        .navbar-brand
+            include brand_header.pug
+        span.badge.badge-pill.badge-darker.mb-1.pl-3.pr-3.mr-2.ml-auto
+            i.fa.fa-user   user 
+                    .dropdown-menu(aria-labelledby="navbarUserMenu").dropdown-menu-right.bg-dark
+                        a.dropdown-item(href="/Profile") Profile
+                        a.dropdown-item(href="/Notifications") Notifications
+                        a.dropdown-item(href="/Logout") Logout
+
+        button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarToggler", aria-controls="navbarTogglerDemo01", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+        .collapse.navbar-collapse.ml-auto.flex-grow-0#navbarToggler
+            ul.navbar-nav.ml-auto
+                li.nav-item
+                    a.nav-link(href="#") Home 
+                    span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href="#") Link
+                li.nav-item
+                    a.nav-link.disabled(href="#") Disabled
+                li.nav-item.dropdown
+                    a.nav-link.dropdown-toggle#navbarDropdownMenu(href="#", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Dropdown link 
+                    .dropdown-menu(aria-labelledby="navbarDropdownMenu").dropdown-menu-right.bg-dark
+                        a.dropdown-item(href="/Profile") Profile
+                        a.dropdown-item(href="/Notifications") Notifications
+                        a.dropdown-item(href="/Logout") Logout
+    .container
+            p placeholder
+
+

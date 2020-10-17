@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node app"
   },
   "dependencies": {
     "accesscontrol": "^2.2.1",
@@ -14,10 +14,15 @@
     "dot-env": "0.0.1",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
     "morgan": "^1.10.0",
-    "pug": "2.0.0-beta11"
+    "node-pre-gyp": "^0.15.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "2.0.0-beta11",
+    "session-file-store": "^1.5.0"
   }
 }

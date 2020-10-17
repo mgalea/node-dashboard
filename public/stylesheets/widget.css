@@ -1,0 +1,192 @@
+
+/***********************************/
+/**          WIDGET               **/
+/**********************************/
+.widget {
+  border-radius: 20px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 12px 17px;
+  color: #f8f8f8;
+  background: rgba(51, 51, 51, 0.425);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.widget.normal {
+  height: 220px;
+}
+
+.widget.large {
+  height: 315px;
+}
+
+.widget.large .body {
+  height: 280px;
+}
+
+.widget.xlarge {
+  height: 415px;
+}
+
+.widget.xlarge .body {
+  height: 380px;
+}
+
+.widget.tiny {
+  height: 188px;
+}
+
+.widget.tiny-x2 {
+  height: 426px;
+}
+
+.widget.transparent {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.widget>header {
+  position: relative;
+  background: none;
+  color: white;
+  text-align: center;
+}
+
+.widget>header h1,
+.widget>header h2,
+.widget>header h3,
+.widget>header h4,
+.widget>header h5 {
+  margin: 0;
+  line-height: 20px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.widget>header h1 small,
+.widget>header h2 small,
+.widget>header h3 small,
+.widget>header h4 small,
+.widget>header h5 small {
+  text-transform: lowercase;
+  color: #d2d2d2;
+}
+
+.widget>header h4 {
+  font-size: 14px;
+}
+
+.widget .body {
+  margin-top: 10px;
+}
+
+.widget>footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 15px 0 0;
+}
+
+.widget .actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.widget .actions a {
+  text-decoration: none;
+}
+
+.widget .widget-table-overflow {
+  margin: 0 -17px -12px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.widget .widget-table-overflow .table>thead>tr>th:first-child,
+.widget .widget-table-overflow .table>thead>tr>td:first-child,
+.widget .widget-table-overflow .table>tbody>tr>th:first-child,
+.widget .widget-table-overflow .table>tbody>tr>td:first-child,
+.widget .widget-table-overflow .table>tfoot>tr>th:first-child,
+.widget .widget-table-overflow .table>tfoot>tr>td:first-child {
+  padding-left: 17px;
+}
+
+.widget .widget-table-overflow .table>thead>tr>th:last-child,
+.widget .widget-table-overflow .table>thead>tr>td:last-child,
+.widget .widget-table-overflow .table>tbody>tr>th:last-child,
+.widget .widget-table-overflow .table>tbody>tr>td:last-child,
+.widget .widget-table-overflow .table>tfoot>tr>th:last-child,
+.widget .widget-table-overflow .table>tfoot>tr>td:last-child {
+  padding-right: 17px;
+}
+
+.widget-controls {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  word-spacing: 1px;
+}
+
+.widget-controls.left {
+  left: 0;
+  right: auto;
+}
+
+.widget-controls>a,
+.widget-controls>span {
+  padding: 1px 4px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.45);
+  -webkit-transition: color 0.15s ease-in-out;
+  -o-transition: color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out;
+}
+
+.widget-controls>a>.fa,
+.widget-controls>span>.fa {
+  vertical-align: middle;
+}
+
+.widget-controls>a>.glyphicon,
+.widget-controls>span>.glyphicon {
+  vertical-align: -1px;
+}
+
+.widget-controls>a:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.widget-controls .fa-refresh {
+  position: relative;
+  top: -1px;
+}
+
+.input-group-addon {
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1;
+  color: #ccc;
+  text-align: center;
+  background-color: rgba(51, 51, 51, 0.3);
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+.input-group {
+margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: .8rem;
+}

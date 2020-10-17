@@ -1,42 +1,72 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session')
+var passport = require('passport');
 var fs = require('fs');
 var path = require('path');
+var FileStore = require('session-file-store')(session);
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+/**
+ * -------------- GENERAL SETUP ----------------
+*/
 require("dotenv").config({
   path: path.join(__dirname, ".env")
 });
+require('./config/passport');
 
-var indexRouter = require('./routes/routes');
+var routes = require('./routes');
+var FileStore = require('session-file-store')(session);
 
-var app = express();
-app.use(express.static(__dirname + '/public'));
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
+var app = express();
+app.use(express.static(path.join(__dirname, '/public')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('common', { stream: accessLogStream }));
-app.use('/', indexRouter);
-
-
 app.use(cookieParser());
 
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-//this line is required to parse the request body
+app.use(session({
+  store: new FileStore({ retries: 0 }),
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  name: process.env.SESSION_COOKIE || 'connect.sid',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+  }
+})
+);
+
+/**
+ * -------------- PASSPORT AUTHENTICATION ----------------
+ */
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(routes);
+
+/**
+ * -------------- ROUTES ----------------
+ */
 
 // catch 404 errors and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
+
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -46,24 +76,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.use(async (req, res, next) => {
-  if (req.headers["x-access-token"]) {
-    const accessToken = req.headers["x-access-token"];
-    const { userId, exp } = await jwt.verify(accessToken, process.env.JWT_SECRET);
+// Imports all of the routes from ./routes/routes.js
 
-    // Check if token has expired
-    if (exp < Date.now().valueOf() / 1000) {
-      return res.status(401).json({ error: "JWT token has expired, please login to obtain a new one" });
-    }
-    res.locals.loggedInUser = await User.findById(userId); next();
-  } else {
-    next();
-  }
-});
 
-const getUserData = () => {
-  const jsonData = fs.readFileSync('./users.json')
-  return JSON.parse(jsonData)
-}
-
-module.exports = app;
+app.listen(process.env.PORT || 3000);
