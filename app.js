@@ -8,6 +8,11 @@ var FileStore = require('session-file-store')(session);
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var fileUtil= require('./lib/fileUtils');
+
+fileUtil.listDirectory('C:\\node-accesscontrol', function (dir,files) {
+  console.log('There are ' + dir.length + ' entries: ' + JSON.stringify(dir,null,2));
+});
 
 /**
  * -------------- GENERAL SETUP ----------------
