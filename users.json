@@ -11,6 +11,13 @@
         "username": "mario",
         "password": "f7f2c9029052add2a826404f3c54ee37cefe1cf23ea1d629e02b86c512d9a4f5",
         "email": "mario.s.galea@gmail.com",
-        "role": "basic"
+        "role": "admin"
+    },
+    {
+        "id": "17f86d0cbce23ec6",
+        "username": "mpace",
+        "password": "f7f2c9029052add2a826404f3c54ee37cefe1cf23ea1d629e02b86c512d9a4f5",
+        "email": "mario.s.galea@gmail.com",
+        "role": "supervisor"
     }
-]
+] 

@@ -1,4 +1,3 @@
-
 /***********************************/
 /**          WIDGET               **/
 /**********************************/
@@ -181,7 +180,7 @@
 }
 
 .input-group {
-margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form-group {
@@ -189,4 +188,104 @@ margin-bottom: 15px;
   font-family: 'Open Sans';
   font-weight: 600;
   font-size: .8rem;
+}
+
+
+/****************************************/
+/**          SINGLE WIDGET            **/
+/****************************************/
+
+.single-widget-container {
+  width: 100%;
+  scroll-behavior: auto;
+  z-index: 1030;
+}
+
+@media only screen and (max-width: 348px) {
+  .single-widget-container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.single-widget-container .widget {
+  margin: auto;
+}
+
+.single-widget-container .widget-404-search {
+  margin-top: 0;
+}
+
+.single-widget-container .widget-404-search .search-field {
+  width: 285px;
+}
+
+.single-widget-container.error-page {
+  margin-top: -170px;
+}
+
+
+
+/****************************************/
+/**          LOADING WIDGET            **/
+/****************************************/
+
+.loader {
+  margin: auto;
+  display: inline-block;
+  height: 5px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ball1 {
+  background: lightgray;
+  min-height: 10px;
+  min-width: 10px;
+  border-radius: 50%;
+  animation: bounce 1s alternate infinite ease-in-out,
+    flash 3s alternate infinite ease-in-out;
+}
+
+.ball2 {
+  background: lightgray;
+  min-height: 10px;
+  min-width: 10px;
+  border-radius: 50%;
+  animation: bounce 1s .333s alternate infinite ease-in-out,
+    flash 3s 1s alternate infinite ease-in-out;
+}
+
+.ball3 {
+  background: lightgray;
+  min-height: 10px;
+  min-width: 10px;
+  border-radius: 50%;
+  animation: bounce 1s .666s alternate infinite ease-in-out,
+    flash 3s 2s alternate infinite ease-in-out;
+}
+
+@keyframes bounce {
+  from {
+    position: relative;
+    top: -5px;
+  }
+
+  to {
+    position: relative;
+    top: 5px;
+  }
+}
+
+@keyframes flash {
+  from {
+    background: rgb(255, 255, 255, 1);
+  }
+
+  to {
+    background: rgb(255, 255, 255, 0.2);
+    ;
+  }
 }

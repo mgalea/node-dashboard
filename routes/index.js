@@ -35,7 +35,7 @@ router.get('/login', (req, res, next) => {
 
     if (req.isAuthenticated()) {
         res.render('dashboard', {
-            header: 'Hello ' + req.user.username + '.You are Authenticated as ' + req.user.role + ' user.'
+            header: 'Hi ' + req.user.username, user: req.user
         })
 
     } else {
@@ -48,7 +48,7 @@ router.get('/login', (req, res, next) => {
 router.get('/register', (req, res, next) => {
 
     res.render('register', {
-        title: 'EARP - New User Registration', widgetHeader: 'Fill all the details below'
+        title: 'EARP - New User Registration', widgetHeader: 'Fill all the details below',user:req.user
     });
 
 });
@@ -65,7 +65,7 @@ router.get('/password', (req, res, next) => {
 router.get('/protected-route', isLogged, (req, res, next) => {
 
     res.render('dashboard', {
-        header: 'Hello ' + req.user.username + '.You are Authenticated as ' + req.user.role + ' user.'
+        header: 'Hello ' + req.user.username + '.You are Authenticated as ' + req.user.role + ' user.', user: req.user
     })
 
 });

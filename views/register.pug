@@ -7,46 +7,61 @@ block extra_stylesheets
 
 block content
     .login
-        include brand_header.pug
-        .single-widget-container
-            section.widget.login-widget
-                .logo
-                    img(src='images/RS_AI.svg')
-                header.text-align-center
-                    h4 Register as a new user
-                    if errors
-                        ul.error
-                            each error in errors
-                                li=error.msg
-                .body
-                    form.no-margin(action='/register' method='POST')
-                        fieldset
-                            .form-group
-                                label(for='username') Username
-                                .input-group
-                                    span.input-group-addon
-                                        i.fa.fa-user
-                                    input#username.form-control.input-lg.input-transparent(type='text' placeholder='Enter a Username' required='' name='username' value= (username !== 'undefined' ? username : ''))
-                                label(for='email') Email
-                                .input-group
-                                    span.input-group-addon
-                                        i.fa.fa-envelope
-                                    input#email.form-control.input-lg.input-transparent(type='text' placeholder='Enter Your Email' required='' name='email' value=email)
-                                label(for='password') Password
-                                .input-group
-                                    span.input-group-addon
-                                        i.fa.fa-key
-                                    input#password.form-control.input-lg.input-transparent(type='password' placeholder='Enter a password' required='' name='password' value=password)
-                                label(for='password2') Verify Password 
-                                .input-group
-                                    span.input-group-addon
-                                        i.fa.fa-lock
-                                    input#password2.form-control.input-lg.input-transparent(type='password' placeholder='Retype password' required='' name='password2' value=password2)
-                        .form-actions
-                            .row
-                                .col-8.my-auto.mx-auto
-                                    a.forgot.small(href='/login') Already have an account?
+        .nav.fixed-top
+            .navbar-brand
+                include brand_header.pug
+        block content
+            .page_placeholder
+            .container.vh-100
+                .single-widget-container
+                    section.widget.registration-widget
+                        .logo
+                            img(src='images/RS_AI.svg')
+                        header.text-align-center
+                            h4 Register as a new user
+                            if errors
+                                ul.error
+                                    each error in errors
+                                        li=error.msg
+                        .body
+                            form#registration.no-margin(action='/register' method='POST')
+                                fieldset
+                                    .form-group
+                                        label(for='username') Username
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-user
+                                            input#username.form-control.input-lg.input-transparent(type='text' placeholder='Enter a Username' required='' name='username' value= (username !== 'undefined' ? username : ''))
+                                        label(for='email') Email
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-envelope
+                                            input#email.form-control.input-lg.input-transparent(type='text' placeholder='Enter Your Email' required='' name='email' value=email)
+                                        label(for='password') Password
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-key
+                                            input#password.form-control.input-lg.input-transparent(type='password' placeholder='Enter a password' required='' name='password' value=password)
+                                        label(for='password2') Verify Password 
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-lock
+                                            input#password2.form-control.input-lg.input-transparent(type='password' placeholder='Retype password' required='' name='password2' value=password2)
+                                        if(user.role==='admin')
+                                            label(for='role') User Role 
+                                                .input-group
+                                                    span.input-group-addon
+                                                        i.fa.fa-tag
+                                                    select#role.form-control.input-lg.input-transparent(name="role" form="registration")
+                                                        option(value='basic') basic
+                                                        option(value='supervisor') supervisor
+                                                        option(value='admin') admin
+                                .form-actions
+                                    .row
+                                        .col-8.my-auto.mx-auto
+                                            if(!user)
+                                                a.forgot.small(href='/login') Already have an account?
 
-                                .col-4
-                                    button.btn.btn-danger.btn-md.float-right(type='submit') Register
+                                        .col-4
+                                            button.btn.btn-danger.btn-md.float-right(type='submit') Register
 

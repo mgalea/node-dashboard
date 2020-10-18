@@ -1,28 +1,45 @@
 extends layout
 
+block extra_stylesheets
+    link(href='stylesheets/widget.css' rel='stylesheet')
+    link(href='stylesheets/font-awesome.css' rel='stylesheet')
+
 block content
     nav.bg-dark.fixed-top.navbar.navbar-dark.navbar-expand-lg
-        
         .navbar-brand
             include brand_header.pug
         button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarToggler", aria-controls="navbarTogglerDemo01", aria-expanded="false", aria-label="Toggle navigation")
             span.navbar-toggler-icon
-        .collapse.navbar-collapse#navbarToggler
+        .collapse.navbar-collapse.ml-auto.flex-grow-0#navbarToggler
             ul.navbar-nav.ml-auto
                 li.nav-item
-                    a.nav-link(href="#") Home 
+                    a.nav-link(href="#")
+                        i.fa.fa-home
+                        span  Home
                     span.sr-only (current)
-                li.nav-item
-                    a.nav-link(href="#") Link
+                if user.role==='admin'
+                    li.nav-item
+                        a.nav-link(href="/register") 
+                            i.fa.fa-link
+                            span  users
                 li.nav-item
                     a.nav-link.disabled(href="#") Disabled
                 li.nav-item.dropdown
-                    a.nav-link.dropdown-toggle#navbarDropdownMenu(href="#", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Dropdown link 
+                    a.nav-link.dropdown-toggle#navbarDropdownMenu(href="#", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false").badge.badge-pill.badge-darker
+                        i.fa.fa-user
+                        span   #{user.username||'anonymous'}
                     .dropdown-menu(aria-labelledby="navbarDropdownMenu").dropdown-menu-right.bg-dark
                         a.dropdown-item(href="/Profile") Profile
                         a.dropdown-item(href="/Notifications") Notifications
                         a.dropdown-item(href="/Logout") Logout
-    .container
-            p placeholder
+    block sub_menu
+    .page_placeholder
+    .container-fluid
+            p=header
+            .loader
+                .ball1
+                .ball2
+                .ball3
+
 
 
